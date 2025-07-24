@@ -1,5 +1,5 @@
 <template>
-    <div ref="scrollRef" class="h-full overflow-y-auto" @scroll="onScroll">
+    <div ref="scrollRef" class="h-full overflow-y-auto hide-scrollbar" @scroll="onScroll">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <MovieCard v-for="movie in movies" :key="movie.id" :movie="movie" />
         </div>

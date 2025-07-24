@@ -1,33 +1,31 @@
 <template>
-    <div class="max-w-3xl mx-auto bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 mt-8">
-        <!-- 横幅背景 -->
+    <div class="max-w-3xl mx-auto bg-white dark:bg-gray-900 rounded-xl shadow-xl p-6 mt-8">
+        <!-- 背景 -->
         <div
             v-if="movie.backdrop_path"
-            class="rounded-lg overflow-hidden mb-4 relative h-40 md:h-64"
+            class="rounded-lg overflow-hidden mb-4 relative h-40 md:h-64 bg-gradient-to-r from-gray-800 via-gray-900 to-black"
         >
             <img
                 :src="getImgUrl(movie.backdrop_path, 'w780')"
-                class="w-full h-full object-cover blur-[2px] scale-105"
+                class="w-full h-full object-cover opacity-60"
                 :alt="movie.title"
             />
-            <!-- 海报浮层 -->
             <img
                 v-if="movie.poster_path"
                 :src="getImgUrl(movie.poster_path)"
-                class="absolute left-4 bottom-2 w-20 md:w-36 h-auto rounded-lg shadow-lg border-4 border-white dark:border-gray-900"
+                class="absolute left-4 bottom-2 w-24 md:w-40 h-auto rounded-lg shadow-lg border-4 border-white dark:border-gray-900"
                 :alt="movie.title"
             />
         </div>
 
         <!-- 主要信息 -->
-        <h1 class="text-2xl font-bold mb-2 flex items-center">
+        <h1 class="text-3xl font-extrabold text-white mb-2 flex items-center">
             {{ movie.title }}
             <span v-if="movie.release_date" class="ml-2 text-base text-gray-400">
                 ({{ movie.release_date.slice(0, 4) }})
             </span>
         </h1>
         <div class="text-gray-500 text-sm mb-3">
-            原名：
             <span class="font-mono">{{ movie.original_title }}</span>
             <span v-if="movie.tagline" class="ml-2 italic text-blue-500">
                 "{{ movie.tagline }}"
@@ -35,11 +33,11 @@
         </div>
 
         <!-- 类型/时长/分级 -->
-        <div class="flex flex-wrap items-center mb-2">
+        <div class="flex flex-wrap text-gray-500 items-center mb-2">
             <span
                 v-for="g in movie.genres"
                 :key="g.id"
-                class="inline-block bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-2 py-1 rounded text-xs mr-2 mb-1"
+                class="inline-block bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-xl text-sm mr-2 mb-1"
             >
                 {{ g.name }}
             </span>
@@ -59,17 +57,17 @@
         </div>
 
         <!-- 简介 -->
-        <p class="text-base text-gray-800 dark:text-gray-100 mb-4" v-if="movie.overview">
-            {{ movie.overview }}
+        <p class="text-base text-gray-800 dark:text-gray-300 mb-4" v-if="movie.overview">
+            {{ movie.overview.trim() }}
         </p>
 
         <!-- 官网/IMDb 链接 -->
-        <div class="mb-3">
+        <div class="mb-3 flex gap-4">
             <a
                 v-if="movie.homepage"
                 :href="movie.homepage"
                 target="_blank"
-                class="text-blue-600 underline mr-4"
+                class="text-blue-600 underline hover:text-blue-500 transition duration-300"
             >
                 官方网站
             </a>
@@ -77,14 +75,14 @@
                 v-if="movie.imdb_id"
                 :href="`https://www.imdb.com/title/${movie.imdb_id}/`"
                 target="_blank"
-                class="text-yellow-600 underline"
+                class="text-yellow-600 underline hover:text-yellow-500 transition duration-300"
             >
                 IMDb
             </a>
         </div>
 
         <!-- 详细信息表格 -->
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto text-gray-500">
             <table class="min-w-full text-xs md:text-sm mb-4">
                 <tbody>
                     <tr v-if="movie.release_date">

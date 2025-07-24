@@ -1,7 +1,7 @@
 <template>
     <div class="h-screen flex flex-col">
         <NavBar class="fixed top-0 left-0 right-0 z-50" />
-        <main class="flex-1 overflow-y-auto pt-16 px-4 py-6">
+        <main class="flex-1 overflow-y-auto dark:bg-gray-900/90 hide-scrollbar pt-16 px-4 py-6">
             <NuxtPage />
         </main>
     </div>
@@ -10,3 +10,13 @@
 <script setup lang="ts">
 import NavBar from "~/components/NavBar.vue";
 </script>
+
+<style>
+.hide-scrollbar {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 和 Edge */
+}
+.hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
+}
+</style>
